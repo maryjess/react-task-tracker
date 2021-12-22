@@ -9,4 +9,8 @@ const About = () => {
     )
 }
 
+/*
+ this is learnt from the youtube link https://www.youtube.com/watch?v=w7ejDZ8SWv8
+*/
+
 export default About
