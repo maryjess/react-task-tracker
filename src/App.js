@@ -22,7 +22,7 @@ function App() {
 
   // Fetch Tasks
   const fetchTasks = async () => {
-    const result = await fetch('http://localhost:5000/tasks')
+    const result = await fetch('https://react-task-tracker-heroku-2nd.herokuapp.com/tasks')
     const data = await result.json()
 
     return data
@@ -30,7 +30,7 @@ function App() {
 
   // Fetch One Task based on the ID
   const fetchTask = async (id) => {
-    const result = await fetch(`http://localhost:5000/tasks/${id}`)
+    const result = await fetch(`https://react-task-tracker-heroku-2nd.herokuapp.com/tasks/${id}`)
     const data = await result.json()
 
     return data
@@ -43,7 +43,7 @@ function App() {
     // console.log(newTask);
     // setTasks([...tasks, newTask])
 
-    const result = await fetch('http://localhost:5000/tasks',
+    const result = await fetch('https://react-task-tracker-heroku-2nd.herokuapp.com/tasks',
     {
       method: 'POST',
       headers: {
@@ -59,7 +59,7 @@ function App() {
 
   // Delete Task
   const deleteTask = async (id) => {
-    await fetch(`http://localhost:5000/tasks/${id}`, { method: 'DELETE' })
+    await fetch(`https://react-task-tracker-heroku-2nd.herokuapp.com/tasks/${id}`, { method: 'DELETE' })
 
     setTasks(tasks.filter((tasks) => tasks.id !== id))
   }
@@ -68,7 +68,7 @@ function App() {
   const toggleReminder = async (id) => {
     const taskToToggle = await fetchTask(id)
     const updatedTask = {...taskToToggle, reminder: !taskToToggle.reminder}
-    const result = await fetch(`http://localhost:5000/tasks/${id}`,
+    const result = await fetch(`https://react-task-tracker-heroku-2nd.herokuapp.com/tasks/${id}`,
     {
       method: 'PUT',
       headers: {
