@@ -1,7 +1,5 @@
 import Task from './Task';
 
-// ini yang didestructure apanya sih? ANS: props.
-
 // const Tasks = (props) => { 
 //     return (
 //         <>

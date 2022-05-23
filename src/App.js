@@ -22,18 +22,26 @@ function App() {
 
   // Fetch Tasks
   const fetchTasks = async () => {
-    const result = await fetch('https://react-task-tracker-heroku-2nd.herokuapp.com/tasks')
-    const data = await result.json()
-
-    return data
+    try {
+      const result = await fetch('https://react-task-tracker-heroku-2nd.herokuapp.com/tasks')
+      const data = await result.json()
+      return data
+    }
+    catch (error) {
+      console.log(error);
+    }
   }
 
   // Fetch One Task based on the ID
   const fetchTask = async (id) => {
-    const result = await fetch(`https://react-task-tracker-heroku-2nd.herokuapp.com/tasks/${id}`)
-    const data = await result.json()
-
-    return data
+    try {
+      const result = await fetch(`https://react-task-tracker-heroku-2nd.herokuapp.com/tasks/${id}`)
+      const data = await result.json()
+      return data
+    }
+    catch (error) {
+      console.log(error);
+    }
   }
 
   // Add Task
@@ -42,7 +50,7 @@ function App() {
     // const newTask = {id, ...task}
     // console.log(newTask);
     // setTasks([...tasks, newTask])
-
+  try {
     const result = await fetch('https://react-task-tracker-heroku-2nd.herokuapp.com/tasks',
     {
       method: 'POST',
@@ -56,30 +64,40 @@ function App() {
     const data = await result.json()
     setTasks([...tasks, data])
   }
+  catch (error) {
+    console.log(error);
+  }
+}
 
   // Delete Task
   const deleteTask = async (id) => {
-    await fetch(`https://react-task-tracker-heroku-2nd.herokuapp.com/tasks/${id}`, { method: 'DELETE' })
-
-    setTasks(tasks.filter((tasks) => tasks.id !== id))
+    try {
+      await fetch(`https://react-task-tracker-heroku-2nd.herokuapp.com/tasks/${id}`, { method: 'DELETE' })
+      setTasks(tasks.filter((tasks) => tasks.id !== id))
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   // Toggle Reminder
   const toggleReminder = async (id) => {
-    const taskToToggle = await fetchTask(id)
-    const updatedTask = {...taskToToggle, reminder: !taskToToggle.reminder}
-    const result = await fetch(`https://react-task-tracker-heroku-2nd.herokuapp.com/tasks/${id}`,
-    {
-      method: 'PUT',
-      headers: {
-        'Content-type': 'application/json'
-      },
-      body: JSON.stringify(updatedTask)
+    try { 
+      const taskToToggle = await fetchTask(id)
+      const updatedTask = {...taskToToggle, reminder: !taskToToggle.reminder}
+      const result = await fetch(`https://react-task-tracker-heroku-2nd.herokuapp.com/tasks/${id}`,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify(updatedTask)
+      }
+      )
+      const data = await result.json()
+      setTasks(tasks.map((tasks) => tasks.id === id ? {...tasks, reminder: data.reminder} : tasks))
+    } catch (error) {
+      console.log(error);
     }
-    )
-    const data = await result.json()
-
-    setTasks(tasks.map((tasks) => tasks.id === id ? {...tasks, reminder: data.reminder} : tasks))
   }
 
   return (

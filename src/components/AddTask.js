@@ -11,7 +11,7 @@ const AddTask = ({onAdd}) => {
 
         if(!text) {
             alert('Please add a task')
-            // return. why need return here? actually dunnid right
+            // no need return value
         }
 
         onAdd({text, day, reminder}) // proceeds to pass the data to onAdd

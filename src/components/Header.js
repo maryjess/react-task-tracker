@@ -19,7 +19,7 @@ Header.propTypes = {
     title: PropTypes.string.isRequired,
 }
 
-// CSS in JS, tar tinggal panggil style={headerStyle} di belakang h1
+// CSS in JS, only need to call style={headerStyle} at the back of h1
 // const headerStyle = {
 //     color: 'red', 
 //     backgroundColor: 'black'
